@@ -1,0 +1,10 @@
+services:
+  resume-upper:
+    container_name: resume-upper
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./runtime:/runtime
+      - .:/app
+    restart: unless-stopped
