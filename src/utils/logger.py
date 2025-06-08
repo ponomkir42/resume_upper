@@ -39,3 +39,6 @@ def create_logger(
     logger.addHandler(file_handler)
 
     return logger
+
+
+logger = init_logger()

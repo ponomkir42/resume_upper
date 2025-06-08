@@ -43,14 +43,16 @@ class Config(BaseSettings):
         CronSettings(hour=19, minute=15),
         CronSettings(hour=23, minute=20)
     ]
+    HH_UPDATE_URL: str = "https://hh.ru/applicant/resumes/touch"
 
     # habr
     HABR_STATUS: Status = Status.ENABLED
     HABR_UUID: str | None = None
     HABR_USER_TOKEN: str | None = None
     HABR_CRON_SETTINGS: list[CronSettings] = [
-        CronSettings(hour=7),
+        CronSettings(hour=10),
     ]
+    HABR_UPDATE_URL: str = "https://career.habr.com/api/frontend_v1/users/me"
 
     @model_validator(mode="after")
     def validate_config(self) -> "Config":

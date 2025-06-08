@@ -25,13 +25,14 @@ headers = {
 
 
 async def refresh_habr_resume() -> None:
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(cookies=cookies, headers=headers) as client:
         try:
-            response = await client.get(
-                "https://career.habr.com/profile/personal/edit",
-                cookies=cookies,
-                headers=headers
-            )
+            response = await client.get(config.HABR_UPDATE_URL)
             response.raise_for_status()
+            result = response.json()
+            if user := result.get("user"):
+                logger.debug(f"Successfully refreshed habr resume for user: {user.get('fullName')}")
+            else:
+                raise Exception(f"Unexpected response: {result}")
         except Exception as e:
             await handle_request_error("refresh_habr_resume", e)

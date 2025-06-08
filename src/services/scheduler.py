@@ -21,6 +21,7 @@ def configure_habr_jobs(scheduler: AsyncIOScheduler) -> None:
         logger.warning("Please make sure that you pass Habr career cookies in .env file")
 
 async def setup_scheduler() -> AsyncIOScheduler:
+    logger.info("Start scheduler")
     scheduler  = AsyncIOScheduler()
     configure_hh_jobs(scheduler)
     configure_habr_jobs(scheduler)

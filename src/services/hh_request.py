@@ -1,7 +1,7 @@
 import httpx
 
 from config import config
-from utils import logger, handle_request_error
+from utils import handle_request_error
 
 
 form_data = {
@@ -37,14 +37,9 @@ headers = {
 
 
 async def refresh_hh_resume() -> None:
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(cookies=cookies, headers=headers) as client:
         try:
-            response = await client.post(
-                "https://chelyabinsk.hh.ru/applicant/resumes/touch",
-                data=form_data,
-                cookies=cookies,
-                headers=headers
-            )
+            response = await client.post(config.HH_UPDATE_URL, data=form_data)
             response.raise_for_status()
         except Exception as e:
             await handle_request_error("refresh_hh_resume", e)

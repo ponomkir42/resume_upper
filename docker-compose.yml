@@ -8,3 +8,13 @@ services:
       - ./runtime:/runtime
       - .:/app
     restart: unless-stopped
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["pytest", "tests", "-vv"]
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app/src
