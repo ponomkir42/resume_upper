@@ -48,7 +48,7 @@ class Config(BaseSettings):
     # habr
     HABR_STATUS: Status = Status.ENABLED
     HABR_UUID: str | None = None
-    HABR_USER_TOKEN: str | None = None
+    HABR_CAREER_SESSION: str | None = None
     HABR_CRON_SETTINGS: list[CronSettings] = [
         CronSettings(hour=10),
     ]
@@ -72,7 +72,7 @@ class Config(BaseSettings):
         # Habr
         if self.HABR_STATUS == Status.ENABLED and not all([
             self.HABR_UUID,
-            self.HABR_USER_TOKEN
+            self.HABR_CAREER_SESSION
         ]):
             self.HABR_STATUS = Status.LACK_OF_DATA
         return self

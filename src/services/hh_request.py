@@ -1,7 +1,7 @@
 import httpx
 
 from config import config
-from utils import handle_request_error
+from utils import logger, handle_request_error
 
 
 form_data = {
@@ -41,5 +41,6 @@ async def refresh_hh_resume() -> None:
         try:
             response = await client.post(config.HH_UPDATE_URL, data=form_data)
             response.raise_for_status()
+            logger.debug(f"Successfully refreshed hh resume with id {config.HH_RESUME_ID}")
         except Exception as e:
             await handle_request_error("refresh_hh_resume", e)

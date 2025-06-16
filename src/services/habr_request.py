@@ -6,7 +6,7 @@ from utils import logger, handle_request_error
 
 cookies = {
     "habr_uuid": config.HABR_UUID,
-    "remember_user_token": config.HABR_USER_TOKEN,
+    "_career_session": config.HABR_CAREER_SESSION,
 }
 
 headers = {
